@@ -6,6 +6,7 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 
 - [PDK Anatomy](concepts/pdk-anatomy.md) explains the major kinds of files that make up a process design kit and where Liberty fits.
 - [Liberty Basics](concepts/liberty-basics.md) describes libraries, cells, pins, scalar metadata, timing arcs, and timing tables at a high level.
+- [Liberty Parser Scope](concepts/liberty-parser-scope.md) documents the M2 fixture-first parser architecture, supported subset, and exclusions.
 - [Standard Cells](concepts/standard-cells.md) explains cell-level metadata such as area, pins, combinational behavior, sequential behavior, and naming conventions.
 - [Timing Corners](concepts/timing-corners.md) explains process, voltage, and temperature corners and why timing changes across them.
 
@@ -14,6 +15,12 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [M1 Repo Foundation](milestones/m1-repo-foundation.md) defines the scope, exclusions, acceptance criteria, and M2 handoff.
 - [2026-04-27 M1 Kickoff Log](logs/2026-04-27-m1-kickoff.md) records the first project decisions.
 - [M1 Foundation Report](reports/m1-foundation-report.md) summarizes the foundation state and parser scope.
+
+## M2 Records
+
+- [M2 Liberty Parser Core](milestones/m2-liberty-parser-core.md) defines the parser-core milestone scope, deliverables, acceptance criteria, exclusions, and M3 handoff.
+- [2026-04-27 M2 Parser-Core Log](logs/2026-04-27-m2-liberty-parser-core.md) records the parser architecture, fixture, and diagnostics decisions.
+- [M2 Liberty Parser Core Report](reports/m2-liberty-parser-core-report.md) summarizes the implementation, tests, limitations, and handoff to M3.
 
 ## Roadmap
 

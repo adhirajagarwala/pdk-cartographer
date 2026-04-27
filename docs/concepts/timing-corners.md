@@ -16,4 +16,4 @@ Implementation tools need to know whether timing closes across the range of cond
 
 ## M1 Boundary
 
-M1 does not ingest real Sky130 corners. The current fixtures are synthetic and do not contain real timing tables or characterized PVT data. Real Sky130 read-only ingestion is deferred to M5, after the Liberty parser, standard-cell atlas, and timing-table explorer have clearer tested boundaries.
+M1 and M2 do not ingest real Sky130 corners. The current fixtures are synthetic and do not contain real timing tables or characterized PVT data. Real Sky130 read-only ingestion is deferred to M5, after the Liberty parser, standard-cell atlas, and timing-table explorer have clearer tested boundaries.

@@ -23,4 +23,4 @@ Sequential cells store state. A simplified D flip-flop has a clock pin, a data p
 
 ## Naming and Drive Strength
 
-Cell names often include function and drive-strength hints, such as an inverter family with multiple `X1`, `X2`, or `X4` variants. The exact naming convention belongs to a specific library. In M1, names are synthetic and educational, so they should be read as realistic-looking examples rather than Sky130 facts.
+Cell names often include function and drive-strength hints, such as an inverter family with multiple `X1`, `X2`, or `X4` variants. The exact naming convention belongs to a specific library. In the current M1/M2 fixtures, names are synthetic and educational, so they should be read as realistic-looking examples rather than Sky130 facts.

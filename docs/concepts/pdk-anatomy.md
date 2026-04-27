@@ -14,4 +14,4 @@ These categories overlap in real flows. A standard cell is useful because its lo
 
 ## M1 Focus
 
-M1 focuses only on tiny synthetic Liberty fixtures. It does not download Sky130, ingest real Sky130 libraries, parse LEF/DEF/GDS, run DRC/LVS, install OpenLane/OpenROAD, or claim silicon-level validation. This keeps the first milestone testable and honest: understand the shape of Liberty metadata before touching larger real PDK files.
+M1 and M2 focus only on synthetic Liberty fixtures. The project has not downloaded Sky130, ingested real Sky130 libraries, parsed LEF/DEF/GDS, run DRC/LVS, installed OpenLane/OpenROAD, or claimed silicon-level validation. This keeps the early milestones testable and honest: understand the shape of Liberty metadata before touching larger real PDK files.

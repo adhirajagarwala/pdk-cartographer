@@ -1,0 +1,31 @@
+/* This is a synthetic educational Liberty fixture for pdk-cartographer tests.
+ * It is not copied from Sky130 or any real PDK.
+ */
+
+library( synthetic_parser_edge_cases ) {
+  delay_model : table_lookup;
+  comment_label : "quoted metadata survives";
+  voltage_unit : "1V";
+
+  /* Extra whitespace and a custom attribute exercise parser preservation. */
+  cell(EDGE_BUF_X1) {
+    area : 2.05;
+    pdk_cartographer_note : "synthetic only";
+
+    pin( A ) {
+      direction : input;
+      capacitance : 0.0015;
+      custom_index : 3;
+    }
+
+    pin( Y ) {
+      direction : output;
+      function : "A";
+
+      timing() {
+        related_pin : "A";
+        timing_type : combinational;
+      }
+    }
+  }
+}

@@ -18,10 +18,12 @@ A `pin` group describes an input, output, clock, or other port. Useful scalar at
 
 Timing arcs describe timing relationships between pins. For example, an inverter output can have an arc related to its input with `timing_sense : negative_unate`. A sequential cell can have clock-to-output arcs, setup/hold checks, and other timing relationships.
 
-M1 captures only a minimal arc shape: `related_pin`, `timing_sense`, and `timing_type` when present. That is enough to teach where timing metadata lives without pretending to implement static timing analysis.
+M2 captures only a minimal arc shape: `related_pin`, `timing_sense`, and `timing_type` when present. That is enough to teach where timing metadata lives without pretending to implement static timing analysis.
 
 ## Lookup Tables
 
 Production Liberty timing data often uses lookup tables indexed by input transition, output load, voltage, temperature, or other variables. These tables provide numerical timing and power values for interpolation.
 
-M1 does not parse lookup tables. The fixture parser intentionally stops before timing table parsing so the first implementation remains small, readable, and testable.
+M2 does not parse lookup tables. The fixture parser intentionally stops before timing table parsing so the implementation remains small, readable, and testable.
+
+For the exact parser boundary, see [Liberty Parser Scope](liberty-parser-scope.md).

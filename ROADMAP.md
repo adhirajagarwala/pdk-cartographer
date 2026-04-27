@@ -1,6 +1,6 @@
 # Roadmap
 
-`pdk-cartographer` grows from synthetic fixtures toward careful, read-only PDK exploration. Each milestone should leave behind tested code, honest documentation, and reproducible engineering notes. M1 documentation lives under [docs/](docs/README.md).
+`pdk-cartographer` grows from synthetic fixtures toward careful, read-only PDK exploration. Each milestone should leave behind tested code, honest documentation, and reproducible engineering notes. Project documentation lives under [docs/](docs/README.md).
 
 ## M1 - Repo Foundation and Liberty Fixtures
 
@@ -8,11 +8,11 @@ Establish repository guardrails, documentation, local development expectations, 
 
 ## M2 - Liberty Parser Core
 
-Implement a small handwritten Liberty subset parser that reads the M1 fixtures and extracts useful metadata such as libraries, cells, pins, areas, and minimal timing arc fields. The parser should document what it does not support.
+Implement a small handwritten Liberty subset parser that reads synthetic fixtures and extracts useful metadata such as libraries, library attributes, cells, pins, areas, pin capacitance, output functions, and minimal timing arc fields. M2 adds a lexer, generic group/attribute tree, typed models, parser diagnostics, expanded synthetic fixtures, and tests. It remains fixture-first and does not claim full Liberty compliance.
 
 ## M3 - Standard Cell Atlas
 
-Build a standard-cell metadata view over parsed Liberty data. Focus on names, areas, pin roles, simple boolean functions, and readable summaries that help explain how a cell library is organized.
+Build a standard-cell metadata view over parsed synthetic Liberty data. Focus on names, areas, pin roles, simple boolean functions, minimal timing arc relationships, and readable summaries that help explain how a cell library is organized.
 
 ## M4 - Timing Table Explorer
 
@@ -28,4 +28,4 @@ Produce polished reports and portfolio-ready documentation that connect PDK anat
 
 ## Later Work
 
-LEF exploration comes later, after Liberty work is solid. DEF, GDS, OpenLane/OpenROAD integration, Docker-based flows, and silicon experiments are outside the initial Liberty-first roadmap.
+LEF exploration comes later, after Liberty parsing, atlas reporting, and real read-only Liberty ingestion are solid. DEF, GDS, OpenLane/OpenROAD integration, Docker-based flows, and silicon experiments are outside the initial Liberty-first roadmap.

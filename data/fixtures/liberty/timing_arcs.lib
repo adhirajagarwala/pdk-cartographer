@@ -1,0 +1,40 @@
+/* This is a synthetic educational Liberty fixture for pdk-cartographer tests.
+ * It is not copied from Sky130 or any real PDK.
+ */
+
+library(synthetic_timing_arcs) {
+  delay_model : table_lookup;
+  time_unit : "1ns";
+
+  cell(NAND2_X1) {
+    area : 1.85;
+
+    pin(A) {
+      direction : input;
+      capacitance : 0.0022;
+    }
+
+    pin(B) {
+      direction : input;
+      capacitance : 0.0022;
+    }
+
+    pin(Y) {
+      direction : output;
+      function : "!(A & B)";
+
+      // Minimal timing arc metadata only; no lookup tables in M2.
+      timing() {
+        related_pin : "A";
+        timing_sense : negative_unate;
+        timing_type : combinational;
+      }
+
+      timing() {
+        related_pin : "B";
+        timing_sense : negative_unate;
+        timing_type : combinational;
+      }
+    }
+  }
+}
