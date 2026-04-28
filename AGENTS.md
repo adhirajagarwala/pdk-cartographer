@@ -6,6 +6,30 @@ This repository is `pdk-cartographer`, not CurveCraft.
 
 `pdk-cartographer` is a fixture-first Sky130 PDK exploration project focused on Liberty timing, standard-cell metadata, PDK anatomy, and reproducible engineering reports. CurveCraft is complete through M4 and must not be modified from this repository's work.
 
+## Git Identity — Non-Negotiable
+
+Every commit and push in this repo must be authored as:
+  Name:  Adhiraj Agarwala
+  Email: adhirajagarwala2007@gmail.com
+
+Before the first commit in any session, run:
+  git config user.name "Adhiraj Agarwala"
+  git config user.email "adhirajagarwala2007@gmail.com"
+
+Before every commit, verify:
+  git config user.name
+  git config user.email
+
+Rules:
+- Never commit unless git config user.name is exactly Adhiraj Agarwala.
+- Never commit unless git config user.email is exactly adhirajagarwala2007@gmail.com.
+- Never add Co-Authored-By lines.
+- Never add Signed-off-by lines.
+- Never add AI/tool/assistant contributor metadata.
+- The commit author must be always and only Adhiraj Agarwala.
+- If the git identity is wrong, stop and fix it before committing.
+- If a commit was already created with the wrong identity, stop and report it. Do not rewrite history unless explicitly approved.
+
 ## M1 Scope
 
 M1 is the foundation phase. Keep the work small, inspectable, and reversible.
