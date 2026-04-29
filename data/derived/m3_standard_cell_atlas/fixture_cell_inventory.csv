@@ -1,0 +1,8 @@
+library_name,cell_name,area,family,drive_strength,cell_kind,input_pins,output_pins,clock_pins,other_pins,timing_arc_count
+synthetic_multi_cell_combinational,INV_X1,1.2,INV,X1,combinational,A,Y,,,0
+synthetic_multi_cell_combinational,NAND2_X1,1.85,NAND2,X1,combinational,A;B,Y,,,0
+synthetic_multi_cell_combinational,NOR2_X1,1.95,NOR2,X1,combinational,A;B,Y,,,0
+synthetic_parser_edge_cases,EDGE_BUF_X1,2.05,EDGE_BUF,X1,combinational,A,Y,,,1
+synthetic_timing_arcs,NAND2_X1,1.85,NAND2,X1,combinational,A;B,Y,,,2
+tiny_synthetic_combinational,TINY_INV_X1,1.4,TINY_INV,X1,combinational,A,Y,,,1
+tiny_synthetic_sequential,TINY_DFF_X1,4.8,TINY_DFF,X1,sequential,CLK;D,Q,CLK,,2

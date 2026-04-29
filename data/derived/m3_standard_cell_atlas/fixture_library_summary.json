@@ -1,0 +1,49 @@
+{
+  "notice": "This atlas is generated from synthetic educational Liberty fixtures, not real Sky130 data.",
+  "source_fixture_paths": [
+    "data/fixtures/liberty/multi_cell_combinational.lib",
+    "data/fixtures/liberty/parser_edge_cases.lib",
+    "data/fixtures/liberty/timing_arcs.lib",
+    "data/fixtures/liberty/tiny_combinational.lib",
+    "data/fixtures/liberty/tiny_sequential.lib"
+  ],
+  "summary": {
+    "area_max": 4.8,
+    "area_mean": 2.157142857142857,
+    "area_min": 1.2,
+    "cell_count": 7,
+    "cell_kind_counts": {
+      "combinational": 6,
+      "sequential": 1
+    },
+    "family_counts": {
+      "EDGE_BUF": 1,
+      "INV": 1,
+      "NAND2": 2,
+      "NOR2": 1,
+      "TINY_DFF": 1,
+      "TINY_INV": 1
+    },
+    "largest_cells": [
+      "TINY_DFF_X1",
+      "EDGE_BUF_X1",
+      "NOR2_X1",
+      "NAND2_X1",
+      "NAND2_X1"
+    ],
+    "library_names": [
+      "synthetic_multi_cell_combinational",
+      "synthetic_parser_edge_cases",
+      "synthetic_timing_arcs",
+      "tiny_synthetic_combinational",
+      "tiny_synthetic_sequential"
+    ],
+    "smallest_cells": [
+      "INV_X1",
+      "TINY_INV_X1",
+      "NAND2_X1",
+      "NAND2_X1",
+      "NOR2_X1"
+    ]
+  }
+}
