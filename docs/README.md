@@ -8,6 +8,7 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [Liberty Basics](concepts/liberty-basics.md) describes libraries, cells, pins, scalar metadata, timing arcs, and timing tables at a high level.
 - [Liberty Parser Scope](concepts/liberty-parser-scope.md) documents the M2 fixture-first parser architecture, supported subset, and exclusions.
 - [Standard Cells](concepts/standard-cells.md) explains cell-level metadata such as area, pins, combinational behavior, sequential behavior, and naming conventions.
+- [Standard Cell Atlas](concepts/standard-cell-atlas.md) explains the M3 atlas layer, cell records, area ranking, pin summaries, family grouping, classification rules, and limitations.
 - [Timing Corners](concepts/timing-corners.md) explains process, voltage, and temperature corners and why timing changes across them.
 
 ## M1 Records
@@ -21,6 +22,13 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [M2 Liberty Parser Core](milestones/m2-liberty-parser-core.md) defines the parser-core milestone scope, deliverables, acceptance criteria, exclusions, and M3 handoff.
 - [2026-04-27 M2 Parser-Core Log](logs/2026-04-27-m2-liberty-parser-core.md) records the parser architecture, fixture, and diagnostics decisions.
 - [M2 Liberty Parser Core Report](reports/m2-liberty-parser-core-report.md) summarizes the implementation, tests, limitations, and handoff to M3.
+
+## M3 Records
+
+- [M3 Standard Cell Atlas](milestones/m3-standard-cell-atlas.md) defines the atlas milestone scope, deliverables, acceptance criteria, exclusions, and M4 handoff.
+- [2026-04-27 M3 Standard Cell Atlas Log](logs/2026-04-27-m3-standard-cell-atlas.md) records the atlas model, renderer, generator, and synthetic-data decisions.
+- [M3 Standard Cell Atlas Report](reports/m3-standard-cell-atlas-report.md) summarizes the implementation, generated artifacts, tests, limitations, and handoff to M4.
+- [Generated M3 Fixture Standard Cell Atlas](reports/generated/m3-fixture-standard-cell-atlas.md) is the deterministic Markdown artifact generated from synthetic Liberty fixtures.
 
 ## Roadmap
 

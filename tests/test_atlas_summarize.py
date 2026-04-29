@@ -34,6 +34,20 @@ def test_summarize_all_synthetic_fixture_libraries() -> None:
     )
 
 
+def test_all_fixture_records_have_expected_deterministic_order() -> None:
+    atlas = build_standard_cell_atlas(_fixture_libraries())
+
+    assert [(cell.library_name, cell.cell_name) for cell in atlas.cells] == [
+        ("synthetic_multi_cell_combinational", "INV_X1"),
+        ("synthetic_multi_cell_combinational", "NAND2_X1"),
+        ("synthetic_multi_cell_combinational", "NOR2_X1"),
+        ("synthetic_parser_edge_cases", "EDGE_BUF_X1"),
+        ("synthetic_timing_arcs", "NAND2_X1"),
+        ("tiny_synthetic_combinational", "TINY_INV_X1"),
+        ("tiny_synthetic_sequential", "TINY_DFF_X1"),
+    ]
+
+
 def test_multi_cell_fixture_produces_multiple_deterministic_records() -> None:
     library = parse_liberty_file(FIXTURE_DIR / "multi_cell_combinational.lib")
     atlas = build_standard_cell_atlas([library])
@@ -53,6 +67,25 @@ def test_area_statistics_are_computed_from_available_area_values() -> None:
     assert atlas.summary.area_mean == 15.10 / 7
     assert atlas.summary.smallest_cells[:2] == ("INV_X1", "TINY_INV_X1")
     assert atlas.summary.largest_cells[:2] == ("TINY_DFF_X1", "EDGE_BUF_X1")
+
+
+def test_area_rankings_are_stable_for_duplicate_cell_names() -> None:
+    atlas = build_standard_cell_atlas(_fixture_libraries())
+
+    assert atlas.summary.largest_cells == (
+        "TINY_DFF_X1",
+        "EDGE_BUF_X1",
+        "NOR2_X1",
+        "NAND2_X1",
+        "NAND2_X1",
+    )
+    assert atlas.summary.smallest_cells == (
+        "INV_X1",
+        "TINY_INV_X1",
+        "NAND2_X1",
+        "NAND2_X1",
+        "NOR2_X1",
+    )
 
 
 def test_family_counts_are_computed_for_fixture_cells() -> None:
@@ -81,6 +114,23 @@ def test_classification_counts_include_combinational_and_sequential() -> None:
     assert sequential_record.clock_pins == ("CLK",)
     assert sequential_record.cell_kind == "sequential"
     assert sequential_record.timing_arc_count == 2
+
+
+def test_pin_categories_and_timing_arc_counts_are_summarized() -> None:
+    library = parse_liberty_file(FIXTURE_DIR / "tiny_sequential.lib")
+    atlas = build_standard_cell_atlas([library])
+    record = atlas.cells[0]
+
+    assert record.input_pins == ("CLK", "D")
+    assert record.output_pins == ("Q",)
+    assert record.clock_pins == ("CLK",)
+    assert record.other_pins == ()
+    assert len(record.input_pins) == 2
+    assert len(record.output_pins) == 1
+    assert len(record.clock_pins) == 1
+    assert record.functions == {"Q": "IQ"}
+    assert record.pin_capacitance == {"CLK": 0.003, "D": 0.0024}
+    assert record.timing_arc_count == 2
 
 
 def test_missing_area_does_not_crash_summary() -> None:
@@ -125,6 +175,16 @@ def test_records_are_sorted_by_library_name_then_cell_name() -> None:
         ("a_fixture", "INV_X1"),
         ("z_fixture", "BUF_X1"),
     ]
+
+
+def test_build_standard_cell_atlas_is_repeatable() -> None:
+    libraries = _fixture_libraries()
+
+    first = build_standard_cell_atlas(libraries)
+    second = build_standard_cell_atlas(reversed(libraries))
+
+    assert first.cells == second.cells
+    assert first.summary == second.summary
 
 
 def test_build_cell_record_extracts_pin_groups_and_counts() -> None:

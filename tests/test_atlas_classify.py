@@ -19,6 +19,16 @@ def test_nand2_x1_family_and_drive_strength() -> None:
     assert extract_drive_strength("NAND2_X1") == "X1"
 
 
+def test_family_without_simple_drive_suffix_is_preserved() -> None:
+    assert classify_cell_family("CUSTOM_CELL") == "CUSTOM_CELL"
+    assert extract_drive_strength("CUSTOM_CELL") is None
+
+
+def test_larger_generic_drive_strength_is_extracted() -> None:
+    assert classify_cell_family("BUF_X16") == "BUF"
+    assert extract_drive_strength("BUF_X16") == "X16"
+
+
 def test_dff_x1_classifies_as_sequential() -> None:
     assert (
         classify_cell_kind(
@@ -28,6 +38,34 @@ def test_dff_x1_classifies_as_sequential() -> None:
             clock_pins=(),
             timing_arc_count=0,
             functions={},
+        )
+        == "sequential"
+    )
+
+
+def test_latch_name_classifies_as_sequential() -> None:
+    assert (
+        classify_cell_kind(
+            "LATCH_X1",
+            input_pins=("D",),
+            output_pins=("Q",),
+            clock_pins=(),
+            timing_arc_count=0,
+            functions={"Q": "D"},
+        )
+        == "sequential"
+    )
+
+
+def test_clock_like_input_pin_classifies_as_sequential() -> None:
+    assert (
+        classify_cell_kind(
+            "GENERIC_STORAGE_X1",
+            input_pins=("CK", "D"),
+            output_pins=("Q",),
+            clock_pins=(),
+            timing_arc_count=0,
+            functions={"Q": "D"},
         )
         == "sequential"
     )
@@ -44,6 +82,20 @@ def test_output_function_without_clock_classifies_as_combinational() -> None:
             functions={"Y": "!(A & B)"},
         )
         == "combinational"
+    )
+
+
+def test_function_on_non_output_pin_does_not_make_combinational() -> None:
+    assert (
+        classify_cell_kind(
+            "PARTIAL_METADATA_X1",
+            input_pins=("A",),
+            output_pins=("Y",),
+            clock_pins=(),
+            timing_arc_count=1,
+            functions={"A": "Y"},
+        )
+        == "unknown"
     )
 
 

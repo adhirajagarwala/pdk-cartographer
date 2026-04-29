@@ -6,9 +6,11 @@ A fixture-first exploration toolkit for Liberty timing, standard-cell metadata, 
 
 ## Status
 
-M2 Liberty Parser Core implemented on the `m2-liberty-parser-core` branch.
+M3 Standard Cell Atlas is implemented on the `m3-standard-cell-atlas` branch.
 
 This repository is a serious student-built EDA/PDK exploration toolkit. M1 established durable project boundaries, documentation structure, synthetic fixtures, and quality expectations. M2 strengthens the fixture-first Liberty parser core with a lexer, generic group parser, typed model extraction, diagnostics, expanded synthetic fixtures, and focused tests.
+
+M3 adds a Standard Cell Atlas layer on top of the M2 parser. It summarizes synthetic Liberty fixture cells into deterministic records, area rankings, pin summaries, family counts, conservative combinational/sequential/unknown classification, and generated Markdown/CSV/JSON artifacts.
 
 Real Sky130 ingestion has not started. The current parser is not a full Liberty parser and should be treated as a documented educational subset.
 
@@ -18,22 +20,27 @@ CurveCraft focused on compact-model fitting and ngspice validation. `pdk-cartogr
 
 The point is not to pretend to replace production EDA tools. The point is to build a readable, tested atlas that explains what PDK artifacts contain, how small pieces can be parsed safely, and where educational experiments stop before becoming claims about silicon or signoff accuracy.
 
-## What M1 and M2 Include
+## What M1 Through M3 Include
 
 - Repo guardrails and contribution notes.
 - A Python 3.11+ foundation using the `src/pdk_cartographer` package layout.
 - Tiny synthetic Liberty fixtures marked clearly as educational data.
 - A fixture-oriented Liberty parser core with lexer/tokenizer, generic group tree, typed models, and diagnostics.
+- A Standard Cell Atlas package for fixture-derived cell records, area rankings, pin summaries, family grouping, and conservative cell-kind classification.
+- Standard-library Markdown, CSV, and JSON renderers.
+- A repo-local fixture atlas generator script.
+- Generated synthetic fixture atlas artifacts.
 - Documentation for PDK anatomy, Liberty basics, standard cells, and timing corners.
 - Local validation expectations using pytest, ruff, and mypy.
 - Engineering logs, milestone notes, and foundation/parser-core reports.
 
-## What M1 and M2 Do Not Include
+## What M1 Through M3 Do Not Include
 
 - No Sky130 download or copied Sky130 source files.
 - No OpenLane, OpenROAD, Docker, or external PDK toolchain setup.
 - No LEF, DEF, or GDS parsing.
 - No timing lookup-table parsing.
+- No static timing analysis.
 - No timing plots.
 - No ring oscillator experiments.
 - No silicon-dossier or register-city work.
@@ -57,6 +64,9 @@ LEF exploration belongs later, after Liberty structure and reporting are solid.
 - [Documentation index](docs/README.md)
 - [M1 foundation report](docs/reports/m1-foundation-report.md)
 - [M2 Liberty Parser Core report](docs/reports/m2-liberty-parser-core-report.md)
+- [M3 Standard Cell Atlas report](docs/reports/m3-standard-cell-atlas-report.md)
+- [Generated M3 fixture atlas](docs/reports/generated/m3-fixture-standard-cell-atlas.md)
 - [M1 kickoff log](docs/logs/2026-04-27-m1-kickoff.md)
 - [M2 parser-core log](docs/logs/2026-04-27-m2-liberty-parser-core.md)
+- [M3 standard-cell atlas log](docs/logs/2026-04-27-m3-standard-cell-atlas.md)
 - [Roadmap](ROADMAP.md)

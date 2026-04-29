@@ -23,7 +23,11 @@ and `timing` all follow the same broad pattern.
 The typed extraction layer converts the generic tree into model dataclasses in
 `src/pdk_cartographer/liberty/models.py`. M2 extracts `Library`, `Cell`, `Pin`,
 and `TimingArc` objects with dictionaries for name-indexed lookup and preserved
-simple attributes for later atlas work.
+simple attributes for atlas work.
+
+M3 consumes those typed models in `src/pdk_cartographer/atlas/` to build
+deterministic cell records, library summaries, and Markdown/CSV/JSON artifacts
+from the same synthetic fixtures.
 
 ## Supported Subset
 
