@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from pdk_cartographer.atlas import build_cell_record, build_standard_cell_atlas
 from pdk_cartographer.liberty.models import Cell, Library, Pin
 from pdk_cartographer.liberty.parser import parse_liberty_file
@@ -64,7 +66,7 @@ def test_area_statistics_are_computed_from_available_area_values() -> None:
 
     assert atlas.summary.area_min == 1.20
     assert atlas.summary.area_max == 4.80
-    assert atlas.summary.area_mean == 15.10 / 7
+    assert atlas.summary.area_mean == pytest.approx(15.10 / 7)
     assert atlas.summary.smallest_cells[:2] == ("INV_X1", "TINY_INV_X1")
     assert atlas.summary.largest_cells[:2] == ("TINY_DFF_X1", "EDGE_BUF_X1")
 
