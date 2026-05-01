@@ -22,8 +22,8 @@ M2 captures only a minimal arc shape: `related_pin`, `timing_sense`, and `timing
 
 ## Lookup Tables
 
-Production Liberty timing data often uses lookup tables indexed by input transition, output load, voltage, temperature, or other variables. These tables provide numerical timing and power values for interpolation.
+Production Liberty timing data often uses lookup tables indexed by input transition, output load, voltage, temperature, or other variables. These tables provide numerical timing and power values that production timing tools can use as part of timing analysis.
 
-M2 does not parse lookup tables. The fixture parser intentionally stops before timing table parsing so the implementation remains small, readable, and testable.
+M4 parses a small synthetic timing-table subset: lookup-table templates, `index_1`, `index_2`, `values`, and the `cell_rise`, `cell_fall`, `rise_transition`, and `fall_transition` table groups used by the fixtures. It reports table shape and metadata only. It does not interpolate values or perform static timing analysis.
 
 For the exact parser boundary, see [Liberty Parser Scope](liberty-parser-scope.md).

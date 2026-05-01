@@ -23,15 +23,17 @@ and `timing` all follow the same broad pattern.
 The typed extraction layer converts the generic tree into model dataclasses in
 `src/pdk_cartographer/liberty/models.py`. M2 extracts `Library`, `Cell`, `Pin`,
 and `TimingArc` objects with dictionaries for name-indexed lookup and preserved
-simple attributes for atlas work.
+simple attributes for atlas work. M4 extends those models with
+`LookupTableTemplate` and `TimingTable` records for the timing-table fixtures.
 
 M3 consumes those typed models in `src/pdk_cartographer/atlas/` to build
 deterministic cell records, library summaries, and Markdown/CSV/JSON artifacts
-from the same synthetic fixtures.
+from the synthetic M3 fixtures. M4 consumes the extended timing-table models in
+`src/pdk_cartographer/timing/` to build structural timing-table summaries.
 
 ## Supported Subset
 
-M2 supports enough Liberty-like syntax for the repository fixtures:
+The parser supports enough Liberty-like syntax for the repository fixtures:
 
 - `library(name) { ... }`
 - nested `cell(name)`, `pin(name)`, and minimal `timing()` groups
@@ -40,6 +42,9 @@ M2 supports enough Liberty-like syntax for the repository fixtures:
 - numeric values
 - identifier values
 - simple comma-separated values where fixtures need them
+- complex attributes such as `index_1("...");` and `values("...", "...");`
+- `lu_table_template` groups in the M4 fixtures
+- timing-table groups under `timing()` for the M4 fixtures
 - line comments beginning with `//`
 - block comments using `/* ... */`
 - whitespace between tokens
@@ -57,18 +62,20 @@ The typed model extraction currently captures:
 - pin capacitance
 - simple pin attributes
 - minimal timing arc fields: `related_pin`, `timing_sense`, and `timing_type`
+- lookup-table template names, axis variables, and numeric axes
+- timing-table kind, template reference, resolved axes, and values matrix
 
 ## Intentionally Unsupported
 
-M2 does not parse timing lookup tables such as `cell_rise`, `cell_fall`,
-`rise_transition`, or `fall_transition`. It does not interpret timing surfaces,
-do interpolation, or perform static timing analysis.
+M4 parses a small timing-table subset for synthetic fixtures, including
+`cell_rise`, `cell_fall`, `rise_transition`, and `fall_transition`. It does not
+interpret timing surfaces, do interpolation, plot timing data, or perform static
+timing analysis.
 
-M2 also does not support full Liberty grammar coverage. Unsupported areas
-include bus syntax, escaped identifiers beyond the current tiny subset,
-conditional timing expressions, includes, complex attribute expressions,
-production-scale syntax recovery, power tables, and broader standard-cell
-characterization semantics.
+The parser also does not support full Liberty grammar coverage. Unsupported
+areas include bus syntax, escaped identifiers beyond the current tiny subset,
+conditional timing expressions, includes, production-scale syntax recovery,
+power tables, and broader standard-cell characterization semantics.
 
 This parser is not Liberty-complete and should not be described as a compliant
 Liberty parser. It is a tested educational subset parser.
@@ -76,7 +83,8 @@ Liberty parser. It is a tested educational subset parser.
 ## Milestone Boundaries
 
 Real Sky130 ingestion is deferred to M5, after the fixture parser, atlas model,
-and reports have stronger boundaries.
+timing-table explorer, and reports have stronger boundaries.
 
-LEF, DEF, and GDS are out of scope for M2. LEF exploration should wait until
-the Liberty-side model and reporting work are solid.
+LEF, DEF, and GDS are out of scope for the current Liberty-first milestones.
+LEF exploration should wait until the Liberty-side model and reporting work are
+solid.

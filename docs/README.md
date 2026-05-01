@@ -9,6 +9,7 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [Liberty Parser Scope](concepts/liberty-parser-scope.md) documents the M2 fixture-first parser architecture, supported subset, and exclusions.
 - [Standard Cells](concepts/standard-cells.md) explains cell-level metadata such as area, pins, combinational behavior, sequential behavior, and naming conventions.
 - [Standard Cell Atlas](concepts/standard-cell-atlas.md) explains the M3 atlas layer, cell records, area ranking, pin summaries, family grouping, classification rules, and limitations.
+- [Timing Table Explorer](concepts/timing-table-explorer.md) explains the M4 timing-table subset, lookup-table templates, slew/load axes, summaries, and limitations.
 - [Timing Corners](concepts/timing-corners.md) explains process, voltage, and temperature corners and why timing changes across them.
 
 ## M1 Records
@@ -29,6 +30,13 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [2026-04-27 M3 Standard Cell Atlas Log](logs/2026-04-27-m3-standard-cell-atlas.md) records the atlas model, renderer, generator, and synthetic-data decisions.
 - [M3 Standard Cell Atlas Report](reports/m3-standard-cell-atlas-report.md) summarizes the implementation, generated artifacts, tests, limitations, and handoff to M4.
 - [Generated M3 Fixture Standard Cell Atlas](reports/generated/m3-fixture-standard-cell-atlas.md) is the deterministic Markdown artifact generated from synthetic Liberty fixtures.
+
+## M4 Records
+
+- [M4 Timing Table Explorer](milestones/m4-timing-table-explorer.md) defines the timing-table milestone scope, deliverables, acceptance criteria, exclusions, and M5 handoff.
+- [2026-05-01 M4 Timing Table Explorer Log](logs/2026-05-01-m4-timing-table-explorer.md) records parser, explorer, renderer, generator, and workflow decisions.
+- [M4 Timing Table Explorer Report](reports/m4-timing-table-explorer-report.md) summarizes the implementation, generated artifacts, tests, limitations, and handoff to M5.
+- [Generated M4 Fixture Timing Table Explorer](reports/generated/m4-fixture-timing-table-explorer.md) is the deterministic Markdown artifact generated from synthetic timing-table Liberty fixtures.
 
 ## Roadmap
 

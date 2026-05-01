@@ -30,8 +30,9 @@ Each record preserves:
 - pin capacitance values
 - timing arc count
 
-The atlas does not interpret timing lookup tables, does not run static timing
-analysis, and does not infer physical layout properties.
+The atlas does not run static timing analysis and does not infer physical
+layout properties. M4 adds a separate Timing Table Explorer for synthetic
+lookup-table structure, but the atlas itself remains focused on cell metadata.
 
 ## Area Ranking
 
@@ -80,7 +81,7 @@ cell behavior, not a formal functional model, and not timing validation.
 ## Milestone Boundary
 
 M3 stops at a fixture-generated atlas with Markdown, CSV, and JSON artifacts.
-M4 is the Timing Table Explorer milestone. M5 is the first milestone intended
-to approach real Sky130 Liberty ingestion, and even there the intended mode is
-read-only source handling rather than copying real PDK files into this
+M4 adds synthetic timing-table structure reports. M5 is the first milestone
+intended to approach real Sky130 Liberty ingestion, and even there the intended
+mode is read-only source handling rather than copying real PDK files into this
 repository.

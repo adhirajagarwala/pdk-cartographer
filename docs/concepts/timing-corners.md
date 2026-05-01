@@ -14,6 +14,8 @@ Temperature affects mobility, threshold behavior, leakage, and resistance. Depen
 
 Implementation tools need to know whether timing closes across the range of conditions the design must survive. A path that passes at one corner can fail at another. Setup, hold, clock-to-output, recovery/removal, and power analysis can all be corner-dependent.
 
-## M1 Boundary
+## Current Boundary
 
-M1 and M2 do not ingest real Sky130 corners. The current fixtures are synthetic and do not contain real timing tables or characterized PVT data. Real Sky130 read-only ingestion is deferred to M5, after the Liberty parser, standard-cell atlas, and timing-table explorer have clearer tested boundaries.
+M1 through M4 do not ingest real Sky130 corners. The current timing-table fixtures are synthetic and do not contain characterized PVT data. M4 can describe timing-table axes and dimensions, but it does not perform static timing analysis or claim real corner coverage.
+
+Real Sky130 read-only ingestion is deferred to M5, after the Liberty parser, standard-cell atlas, and timing-table explorer have clearer tested boundaries.

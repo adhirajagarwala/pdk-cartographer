@@ -1,0 +1,13 @@
+library_name,cell_name,pin_name,related_pin,timing_type,timing_sense,table_kind,template_name,variable_1,variable_2,index_1_count,index_2_count,row_count,column_count,value_min,value_max
+synthetic_timing_table_2x2,INV_X1,Y,A,combinational,negative_unate,cell_fall,timing_2x2,input_net_transition,total_output_net_capacitance,2,2,2,2,0.01,0.037
+synthetic_timing_table_2x2,INV_X1,Y,A,combinational,negative_unate,cell_rise,timing_2x2,input_net_transition,total_output_net_capacitance,2,2,2,2,0.012,0.041
+synthetic_timing_table_2x2,INV_X1,Y,A,combinational,negative_unate,fall_transition,timing_2x2,input_net_transition,total_output_net_capacitance,2,2,2,2,0.005,0.018
+synthetic_timing_table_2x2,INV_X1,Y,A,combinational,negative_unate,rise_transition,timing_2x2,input_net_transition,total_output_net_capacitance,2,2,2,2,0.006,0.02
+synthetic_timing_table_3x3,NAND2_X1,Y,A,combinational,negative_unate,cell_fall,timing_3x3,input_net_transition,total_output_net_capacitance,3,3,3,3,0.014,0.071
+synthetic_timing_table_3x3,NAND2_X1,Y,A,combinational,negative_unate,cell_rise,timing_3x3,input_net_transition,total_output_net_capacitance,3,3,3,3,0.018,0.083
+synthetic_timing_table_3x3,NAND2_X1,Y,A,combinational,negative_unate,fall_transition,timing_3x3,input_net_transition,total_output_net_capacitance,3,3,3,3,0.007,0.039
+synthetic_timing_table_3x3,NAND2_X1,Y,A,combinational,negative_unate,rise_transition,timing_3x3,input_net_transition,total_output_net_capacitance,3,3,3,3,0.008,0.043
+synthetic_timing_table_3x3,NAND2_X1,Y,B,combinational,negative_unate,cell_fall,timing_3x3,input_net_transition,total_output_net_capacitance,3,3,3,3,0.015,0.074
+synthetic_timing_table_3x3,NAND2_X1,Y,B,combinational,negative_unate,cell_rise,timing_3x3,input_net_transition,total_output_net_capacitance,3,3,3,3,0.019,0.086
+synthetic_timing_table_edge_cases,BUF_X2,Y,A,combinational,positive_unate,cell_rise,edge_template,input_net_transition,total_output_net_capacitance,2,2,2,2,0.011,0.044
+synthetic_timing_table_edge_cases,DFF_X1,Q,CLK,rising_edge,,cell_rise,edge_template,input_net_transition,total_output_net_capacitance,2,2,2,2,0.032,0.09

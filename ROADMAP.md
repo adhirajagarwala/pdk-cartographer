@@ -16,11 +16,11 @@ Build a standard-cell metadata atlas over parsed synthetic Liberty data. M3 summ
 
 ## M4 - Timing Table Explorer
 
-Extend Liberty handling toward fixture-backed timing-table structure and corner-aware metadata. This milestone can inspect timing table shape, but must remain clear about educational analysis versus signoff timing.
+Extend Liberty handling toward fixture-backed timing-table structure. M4 parses tiny synthetic lookup-table templates and timing tables, summarizes table kinds, axes, dimensions, related pins, and arc metadata, and generates deterministic Markdown/CSV/JSON reports. It does not perform static timing analysis, interpolate values, or claim real Sky130 timing analysis.
 
 ## M5 - Real Sky130 Read-Only Ingestion
 
-Add carefully scoped, read-only ingestion of real Sky130 Liberty files after the fixture parser, atlas layer, and docs are solid. Real PDK data should be treated as source material, not copied wholesale into the repository.
+Add carefully scoped, read-only ingestion of real Sky130 Liberty files after the fixture parser, atlas layer, timing-table explorer, and docs are solid. Real PDK data should be treated as source material, not copied wholesale into the repository.
 
 ## M6 - PDK Atlas Reports and Portfolio Release
 

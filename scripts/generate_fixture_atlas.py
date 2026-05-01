@@ -19,6 +19,13 @@ from pdk_cartographer.atlas import (  # noqa: E402
 from pdk_cartographer.liberty import parse_liberty_file  # noqa: E402
 
 FIXTURE_DIR = REPO_ROOT / "data" / "fixtures" / "liberty"
+M3_ATLAS_FIXTURE_NAMES = (
+    "multi_cell_combinational.lib",
+    "parser_edge_cases.lib",
+    "timing_arcs.lib",
+    "tiny_combinational.lib",
+    "tiny_sequential.lib",
+)
 MARKDOWN_OUTPUT = (
     REPO_ROOT / "docs" / "reports" / "generated" / "m3-fixture-standard-cell-atlas.md"
 )
@@ -41,7 +48,7 @@ JSON_OUTPUT = (
 def main() -> int:
     """Generate Markdown, CSV, and JSON atlas artifacts."""
 
-    fixture_paths = tuple(sorted(FIXTURE_DIR.glob("*.lib")))
+    fixture_paths = tuple(FIXTURE_DIR / name for name in M3_ATLAS_FIXTURE_NAMES)
     libraries = tuple(parse_liberty_file(path) for path in fixture_paths)
     source_fixture_paths = tuple(
         path.relative_to(REPO_ROOT).as_posix() for path in fixture_paths

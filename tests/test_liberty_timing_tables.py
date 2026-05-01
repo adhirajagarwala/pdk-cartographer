@@ -34,16 +34,17 @@ def test_parse_complex_attributes_into_group_tree() -> None:
 
 def test_parse_lu_table_template_axes() -> None:
     library = parse_liberty_file(FIXTURE_DIR / "timing_table_2x2.lib")
+    template = library.lookup_table_templates["timing_2x2"]
 
-    assert library.lookup_table_templates == {
-        "timing_2x2": LookupTableTemplate(
-            name="timing_2x2",
-            variable_1="input_net_transition",
-            variable_2="total_output_net_capacitance",
-            index_1=(0.01, 0.10),
-            index_2=(0.001, 0.010),
-        )
-    }
+    assert template == LookupTableTemplate(
+        name="timing_2x2",
+        variable_1="input_net_transition",
+        variable_2="total_output_net_capacitance",
+        index_1=(0.01, 0.10),
+        index_2=(0.001, 0.010),
+    )
+    assert template.variable_1 == "input_net_transition"
+    assert template.variable_2 == "total_output_net_capacitance"
 
 
 def test_parse_2x2_timing_values_and_attach_to_arc() -> None:
@@ -74,6 +75,7 @@ def test_parse_3x3_timing_values_from_multiple_related_pins() -> None:
     assert len(arcs[0].timing_tables[0].values) == 3
     assert arcs[0].timing_tables[0].values[2] == (0.045, 0.061, 0.083)
     assert arcs[1].timing_tables[0].values[2] == (0.047, 0.064, 0.086)
+    assert all(table.template_name == "timing_3x3" for table in arcs[0].timing_tables)
 
 
 def test_parse_all_four_timing_table_kinds() -> None:
