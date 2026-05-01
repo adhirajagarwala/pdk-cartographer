@@ -1,5 +1,12 @@
 import pdk_cartographer.liberty as liberty
-from pdk_cartographer.liberty.models import Cell, Library, Pin, TimingArc
+from pdk_cartographer.liberty.models import (
+    Cell,
+    Library,
+    LookupTableTemplate,
+    Pin,
+    TimingArc,
+    TimingTable,
+)
 
 
 def test_model_getters_return_name_indexed_members() -> None:
@@ -38,5 +45,7 @@ def test_public_liberty_imports_work() -> None:
     assert liberty.Cell is Cell
     assert liberty.Pin is Pin
     assert liberty.TimingArc is TimingArc
+    assert liberty.TimingTable is TimingTable
+    assert liberty.LookupTableTemplate is LookupTableTemplate
     assert callable(liberty.parse_liberty_text)
     assert callable(liberty.parse_liberty_file)

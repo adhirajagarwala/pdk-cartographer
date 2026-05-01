@@ -1,0 +1,52 @@
+/* This is a synthetic educational Liberty fixture for pdk-cartographer tests.
+ * It is not copied from Sky130 or any real PDK.
+ */
+
+library(synthetic_timing_table_2x2) {
+  delay_model : table_lookup;
+  time_unit : "1ns";
+  capacitive_load_unit : "1,pf";
+
+  lu_table_template(timing_2x2) {
+    variable_1 : input_net_transition;
+    variable_2 : total_output_net_capacitance;
+    index_1("0.01, 0.10");
+    index_2("0.001, 0.010");
+  }
+
+  cell(INV_X1) {
+    area : 1.20;
+
+    pin(A) {
+      direction : input;
+      capacitance : 0.0020;
+    }
+
+    pin(Y) {
+      direction : output;
+      function : "!A";
+
+      timing() {
+        related_pin : "A";
+        timing_sense : negative_unate;
+        timing_type : combinational;
+
+        cell_rise(timing_2x2) {
+          values("0.012, 0.018", "0.026, 0.041");
+        }
+
+        cell_fall(timing_2x2) {
+          values("0.010, 0.016", "0.023, 0.037");
+        }
+
+        rise_transition(timing_2x2) {
+          values("0.006, 0.008", "0.014, 0.020");
+        }
+
+        fall_transition(timing_2x2) {
+          values("0.005, 0.007", "0.012, 0.018");
+        }
+      }
+    }
+  }
+}

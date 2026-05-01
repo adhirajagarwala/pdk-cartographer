@@ -11,6 +11,13 @@ from pdk_cartographer.atlas import (
 from pdk_cartographer.liberty import Library, parse_liberty_file
 
 FIXTURE_DIR = Path("data/fixtures/liberty")
+M3_ATLAS_FIXTURE_NAMES = (
+    "multi_cell_combinational.lib",
+    "parser_edge_cases.lib",
+    "timing_arcs.lib",
+    "tiny_combinational.lib",
+    "tiny_sequential.lib",
+)
 GENERATED_MARKDOWN_PATH = Path(
     "docs/reports/generated/m3-fixture-standard-cell-atlas.md"
 )
@@ -29,7 +36,7 @@ def _atlas_from_multi_cell_fixture():
 
 
 def _atlas_from_all_fixtures():
-    paths = tuple(sorted(FIXTURE_DIR.glob("*.lib")))
+    paths = tuple(FIXTURE_DIR / name for name in M3_ATLAS_FIXTURE_NAMES)
     libraries: tuple[Library, ...] = tuple(parse_liberty_file(path) for path in paths)
     return build_standard_cell_atlas(
         libraries,

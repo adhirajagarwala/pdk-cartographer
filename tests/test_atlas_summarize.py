@@ -7,19 +7,27 @@ from pdk_cartographer.liberty.models import Cell, Library, Pin
 from pdk_cartographer.liberty.parser import parse_liberty_file
 
 FIXTURE_DIR = Path("data/fixtures/liberty")
+M3_ATLAS_FIXTURE_NAMES = (
+    "multi_cell_combinational.lib",
+    "parser_edge_cases.lib",
+    "timing_arcs.lib",
+    "tiny_combinational.lib",
+    "tiny_sequential.lib",
+)
+
+
+def _m3_atlas_fixture_paths() -> tuple[Path, ...]:
+    return tuple(FIXTURE_DIR / name for name in M3_ATLAS_FIXTURE_NAMES)
 
 
 def _fixture_libraries() -> list[Library]:
-    return [
-        parse_liberty_file(path)
-        for path in sorted(FIXTURE_DIR.glob("*.lib"))
-    ]
+    return [parse_liberty_file(path) for path in _m3_atlas_fixture_paths()]
 
 
 def test_summarize_all_synthetic_fixture_libraries() -> None:
     atlas = build_standard_cell_atlas(
         _fixture_libraries(),
-        source_fixture_paths=[str(path) for path in FIXTURE_DIR.glob("*.lib")],
+        source_fixture_paths=[str(path) for path in _m3_atlas_fixture_paths()],
     )
 
     assert atlas.summary.library_names == (
@@ -32,7 +40,7 @@ def test_summarize_all_synthetic_fixture_libraries() -> None:
     assert atlas.summary.cell_count == 7
     assert len(atlas.cells) == 7
     assert atlas.source_fixture_paths == tuple(
-        sorted(str(path) for path in FIXTURE_DIR.glob("*.lib"))
+        str(path) for path in _m3_atlas_fixture_paths()
     )
 
 

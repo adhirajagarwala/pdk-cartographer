@@ -57,6 +57,14 @@ Do not add, install, or create:
 - Commits or tags without explicit owner approval.
 - Linear changes unless explicitly instructed.
 
+## Milestone Merge Workflow
+
+- Do not use GitHub PRs for milestone merges.
+- Do not use GitHub web merges or GitHub API merges.
+- Use local fast-forward merges only.
+- Push main directly only after local validation passes.
+- Never create merge commits.
+
 ## Python Quality Expectations
 
 - Use Python 3.11+.

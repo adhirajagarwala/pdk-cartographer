@@ -1,0 +1,71 @@
+/* This is a synthetic educational Liberty fixture for pdk-cartographer tests.
+ * It is not copied from Sky130 or any real PDK.
+ */
+
+library(synthetic_timing_table_edge_cases) {
+  delay_model : table_lookup;
+  time_unit : "1ns";
+
+  // Whitespace and quoted list variation for future timing-table parsing tests.
+  lu_table_template(edge_template) {
+    variable_1 : input_net_transition;
+    variable_2 : total_output_net_capacitance;
+    index_1("0.02,0.08");
+    index_2("0.002, 0.020");
+  }
+
+  cell(BUF_X2) {
+    area : 2.40;
+
+    pin(A) {
+      direction : input;
+      capacitance : 0.0025;
+    }
+
+    pin(Y) {
+      direction : output;
+      function : "A";
+
+      timing() {
+        related_pin : "A";
+        timing_sense : positive_unate;
+        timing_type : combinational;
+
+        cell_rise(edge_template) {
+          index_1("0.02,0.08");
+          index_2("0.002, 0.020");
+          values("0.011,0.019", "0.026,0.044");
+        }
+      }
+    }
+  }
+
+  cell(DFF_X1) {
+    area : 4.50;
+
+    pin(CLK) {
+      direction : input;
+      capacitance : 0.0032;
+    }
+
+    pin(D) {
+      direction : input;
+      capacitance : 0.0027;
+    }
+
+    pin(Q) {
+      direction : output;
+      function : "IQ";
+
+      timing() {
+        related_pin : "CLK";
+        timing_type : rising_edge;
+
+        // Minimal valid table group for parser robustness coverage.
+        cell_rise(edge_template) {
+          values("0.032, 0.050", "0.061, 0.090");
+        }
+      }
+    }
+  }
+}

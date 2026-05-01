@@ -16,6 +16,28 @@ LibertyAttributes: TypeAlias = dict[str, LibertyModelValue]
 
 
 @dataclass(frozen=True)
+class LookupTableTemplate:
+    """A small Liberty lookup-table template captured from fixture data."""
+
+    name: str
+    variable_1: str | None = None
+    variable_2: str | None = None
+    index_1: tuple[float, ...] = ()
+    index_2: tuple[float, ...] = ()
+
+
+@dataclass(frozen=True)
+class TimingTable:
+    """A parsed timing lookup table from the fixture Liberty subset."""
+
+    table_kind: str
+    template_name: str | None = None
+    index_1: tuple[float, ...] = ()
+    index_2: tuple[float, ...] = ()
+    values: tuple[tuple[float, ...], ...] = ()
+
+
+@dataclass(frozen=True)
 class TimingArc:
     """Minimal timing arc metadata captured from fixture timing groups."""
 
@@ -23,6 +45,7 @@ class TimingArc:
     timing_sense: str | None = None
     timing_type: str | None = None
     attributes: LibertyAttributes = field(default_factory=dict)
+    timing_tables: tuple[TimingTable, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -59,6 +82,9 @@ class Library:
     name: str
     cells: dict[str, Cell] = field(default_factory=dict)
     attributes: LibertyAttributes = field(default_factory=dict)
+    lookup_table_templates: dict[str, LookupTableTemplate] = field(
+        default_factory=dict
+    )
 
     def get_cell(self, name: str) -> Cell:
         """Return a cell by name or raise KeyError."""

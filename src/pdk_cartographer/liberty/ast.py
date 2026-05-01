@@ -18,7 +18,7 @@ class SourceLocation:
 
 @dataclass(frozen=True)
 class LibertyAttribute:
-    """A simple Liberty attribute such as ``area : 1.40;``."""
+    """A Liberty attribute such as ``area : 1.40;`` or ``index_1("...");``."""
 
     name: str
     value: LibertyValue
@@ -30,7 +30,7 @@ class LibertyGroup:
     """A generic Liberty group with arguments, attributes, and child groups."""
 
     name: str
-    args: tuple[LibertyValue, ...] = field(default_factory=tuple)
+    args: tuple[LibertyScalar, ...] = field(default_factory=tuple)
     attributes: dict[str, LibertyAttribute] = field(default_factory=dict)
     groups: tuple[LibertyGroup, ...] = field(default_factory=tuple)
     location: SourceLocation | None = None

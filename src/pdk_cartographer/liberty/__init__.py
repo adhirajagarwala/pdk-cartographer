@@ -13,8 +13,10 @@ from pdk_cartographer.liberty.models import (
     LibertyAttributes,
     LibertyModelValue,
     Library,
+    LookupTableTemplate,
     Pin,
     TimingArc,
+    TimingTable,
 )
 from pdk_cartographer.liberty.parser import (
     parse_liberty,
@@ -34,9 +36,11 @@ __all__ = [
     "LibertyModelValue",
     "LibertyParseError",
     "Library",
+    "LookupTableTemplate",
     "Pin",
     "SourceLocation",
     "TimingArc",
+    "TimingTable",
     "Token",
     "TokenKind",
     "parse_liberty",
