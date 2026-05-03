@@ -65,6 +65,19 @@ Do not add, install, or create:
 - Push main directly only after local validation passes.
 - Never create merge commits.
 
+## M5 External PDK Rules
+
+M5 uses a real external Sky130 PDK only as read-only input. Prefer `PDK_CARTOGRAPHER_PDK_ROOT` for the external PDK root, and fall back to `PDK_ROOT` only when the preferred variable is unset.
+
+Rules:
+- Never copy raw PDK files into this repository.
+- Never symlink raw PDK files into this repository.
+- Never commit raw PDK files, including Liberty, LEF, DEF, GDS, SPICE, SPEF, SDF, or database artifacts.
+- Keep real PDK paths external and environment-driven.
+- Generated summaries, manifests, reports, CSV files, and JSON files may be committed when they are small, deterministic, and do not include raw PDK contents.
+- M5 remains read-only exploration and parser compatibility probing, not production signoff.
+- M5 follows the no-PR milestone workflow: local branch, local validation, local fast-forward merge, direct push only after validation, and no GitHub merge commits.
+
 ## Python Quality Expectations
 
 - Use Python 3.11+.

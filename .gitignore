@@ -22,6 +22,26 @@ env/
 htmlcov/
 coverage.xml
 
+# External PDK roots and raw layout artifacts
+/pdk/
+/pdks/
+/external/
+/sky130A/
+/sky130B/
+/skywater-pdk/
+/.volare/
+/.ciel/
+*.lib.gz
+*.db
+*.lef
+*.def
+*.gds
+*.gdsii
+*.mag
+*.spice
+*.spef
+*.sdf
+
 # OS and editor noise
 .DS_Store
 Thumbs.db

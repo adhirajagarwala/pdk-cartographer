@@ -14,7 +14,7 @@ M3 adds a Standard Cell Atlas layer on top of the M2 parser. It summarizes synth
 
 M4 adds a Timing Table Explorer. It parses small synthetic lookup-table templates and timing tables, summarizes slew/load table shapes and timing arc metadata, and generates deterministic Markdown/CSV/JSON artifacts.
 
-Real Sky130 ingestion has not started. The current parser is not a full Liberty parser and should be treated as a documented educational subset.
+Real Sky130 ingestion starts in M5 as read-only external PDK exploration. Raw PDK files are not stored in this repository; use `PDK_CARTOGRAPHER_PDK_ROOT` to point at an external Sky130 installation. The current parser is not a full Liberty parser and should be treated as a documented educational subset.
 
 ## Why This Exists After CurveCraft
 
