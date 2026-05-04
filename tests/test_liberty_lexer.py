@@ -47,6 +47,20 @@ def test_tokenize_ignores_whitespace_and_line_comments() -> None:
     ]
 
 
+def test_tokenize_ignores_line_continuation_backslash() -> None:
+    tokens = tokenize('values("1", \\\n  "2");')
+
+    assert [token.value for token in tokens[:-1]] == [
+        "values",
+        "(",
+        "1",
+        ",",
+        "2",
+        ")",
+        ";",
+    ]
+
+
 def test_tokenize_ignores_block_comments_and_tracks_locations() -> None:
     tokens = tokenize("/* synthetic\nfixture */\ncell(A) {}")
 

@@ -70,6 +70,8 @@ class _Lexer:
             char = self._peek()
             if char.isspace():
                 self._consume_whitespace()
+            elif char == "\\" and self._peek_next() == "\n":
+                self._consume_line_continuation()
             elif char == "/" and self._peek_next() == "/":
                 self._consume_line_comment()
             elif char == "/" and self._peek_next() == "*":
@@ -91,6 +93,10 @@ class _Lexer:
     def _consume_whitespace(self) -> None:
         while not self._at_end() and self._peek().isspace():
             self._advance()
+
+    def _consume_line_continuation(self) -> None:
+        self._advance()
+        self._advance()
 
     def _consume_line_comment(self) -> None:
         self._advance()

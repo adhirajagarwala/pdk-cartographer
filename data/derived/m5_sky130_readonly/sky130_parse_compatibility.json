@@ -1,0 +1,56 @@
+{
+  "compatibility_results": [
+    {
+      "cell_count": 428,
+      "corner": "tt_025C_1v80",
+      "error_class": null,
+      "error_message": null,
+      "library_family": "sky130_fd_sc_hd",
+      "library_name": "sky130_fd_sc_hd__tt_025C_1v80",
+      "relative_path": "ciel/sky130/versions/d815bb30c9afdf9e264c276a8a2b533108dea3d0/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
+      "size_bytes": 12841637,
+      "success": true,
+      "timing_table_count": 5368,
+      "variant": "sky130A"
+    },
+    {
+      "cell_count": 428,
+      "corner": "ff_100C_1v95",
+      "error_class": null,
+      "error_message": null,
+      "library_family": "sky130_fd_sc_hd",
+      "library_name": "sky130_fd_sc_hd__ff_100C_1v95",
+      "relative_path": "ciel/sky130/versions/d815bb30c9afdf9e264c276a8a2b533108dea3d0/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_100C_1v95.lib",
+      "size_bytes": 12842685,
+      "success": true,
+      "timing_table_count": 5368,
+      "variant": "sky130A"
+    },
+    {
+      "cell_count": 428,
+      "corner": "ss_100C_1v40",
+      "error_class": null,
+      "error_message": null,
+      "library_family": "sky130_fd_sc_hd",
+      "library_name": "sky130_fd_sc_hd__ss_100C_1v40",
+      "relative_path": "ciel/sky130/versions/d815bb30c9afdf9e264c276a8a2b533108dea3d0/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v40.lib",
+      "size_bytes": 12847083,
+      "success": true,
+      "timing_table_count": 5368,
+      "variant": "sky130A"
+    }
+  ],
+  "failure_count": 0,
+  "limitations": "The probe uses a selected max-3 real Sky130 Liberty subset, records compact success/failure diagnostics, and never copies or emits raw Liberty text.",
+  "parser_scope_warning": "The current parser is a fixture-first educational Liberty subset parser. These results are compatibility probes only and do not claim full Liberty support or production signoff readiness.",
+  "pdk_root": {
+    "display": "$PDK_CARTOGRAPHER_PDK_ROOT",
+    "env_var": "PDK_CARTOGRAPHER_PDK_ROOT"
+  },
+  "selected_files": [
+    "ciel/sky130/versions/d815bb30c9afdf9e264c276a8a2b533108dea3d0/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib",
+    "ciel/sky130/versions/d815bb30c9afdf9e264c276a8a2b533108dea3d0/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_100C_1v95.lib",
+    "ciel/sky130/versions/d815bb30c9afdf9e264c276a8a2b533108dea3d0/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v40.lib"
+  ],
+  "success_count": 3
+}
