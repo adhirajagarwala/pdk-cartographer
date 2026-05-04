@@ -73,3 +73,31 @@ def test_missing_root_returns_empty_result(tmp_path: Path) -> None:
     pdk = discover_sky130_pdk(tmp_path / "missing")
 
     assert pdk.variants == ()
+
+
+def test_discovery_normalizes_paths_relative_to_configured_root(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "external" / "pdks"
+    lib_path = (
+        root
+        / "ciel"
+        / "sky130"
+        / "versions"
+        / "fake_hash"
+        / "sky130A"
+        / "libs.ref"
+        / "sky130_fd_sc_hd"
+        / "lib"
+        / "sky130_fd_sc_hd__ff_100C_1v95.lib"
+    )
+    write_fake_liberty(lib_path)
+
+    pdk = discover_sky130_pdk(root)
+    liberty = pdk.variants[0].liberty_files[0]
+
+    assert liberty.relative_path == (
+        "ciel/sky130/versions/fake_hash/sky130A/libs.ref/"
+        "sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_100C_1v95.lib"
+    )
+    assert str(tmp_path) not in liberty.relative_path

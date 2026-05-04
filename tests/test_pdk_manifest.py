@@ -35,6 +35,29 @@ def test_select_target_subset_prefers_sky130a_hd_tt_ff_ss(tmp_path: Path) -> Non
     ]
 
 
+def test_select_target_subset_stays_bounded_when_many_corners_exist(
+    tmp_path: Path,
+) -> None:
+    lib_dir = tmp_path / "sky130A" / "libs.ref" / "sky130_fd_sc_hd" / "lib"
+    for corner in (
+        "tt_025C_1v80",
+        "ff_100C_1v95",
+        "ss_100C_1v40",
+        "ss_n40C_1v28",
+        "ff_n40C_1v95",
+    ):
+        write_fake_liberty(lib_dir / f"sky130_fd_sc_hd__{corner}.lib")
+
+    selected = select_target_subset(discover_sky130_pdk(tmp_path))
+
+    assert len(selected) == 3
+    assert {liberty.corner for liberty in selected} == {
+        "tt_025C_1v80",
+        "ff_100C_1v95",
+        "ss_100C_1v40",
+    }
+
+
 def test_manifest_uses_env_label_and_relative_paths(tmp_path: Path) -> None:
     lib_path = (
         tmp_path
