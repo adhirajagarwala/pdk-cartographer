@@ -6,7 +6,7 @@ A fixture-first exploration toolkit for Liberty timing, standard-cell metadata, 
 
 ## Status
 
-M5 Real Sky130 Read-Only Ingestion is in progress on the `m5-sky130-readonly-ingestion` branch. M1 through M4 are complete, and M5 now adds external Sky130 discovery, safe generated manifests, and parser compatibility probes.
+M1 through M5 are complete on `main`. M5 Real Sky130 Read-Only Ingestion adds external Sky130 discovery, safe generated manifests, and parser compatibility probes without committing raw PDK files.
 
 This repository is a serious student-built EDA/PDK exploration toolkit. M1 established durable project boundaries, documentation structure, synthetic fixtures, and quality expectations. M2 strengthens the fixture-first Liberty parser core with a lexer, generic group parser, typed model extraction, diagnostics, expanded synthetic fixtures, and focused tests.
 
