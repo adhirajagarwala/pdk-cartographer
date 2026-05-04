@@ -20,11 +20,17 @@ Extend Liberty handling toward fixture-backed timing-table structure. M4 parses 
 
 ## M5 - Real Sky130 Read-Only Ingestion
 
-Add carefully scoped, read-only ingestion of real Sky130 Liberty files after the fixture parser, atlas layer, timing-table explorer, and docs are solid. Real PDK data should be treated as source material, not copied wholesale into the repository.
+Add carefully scoped, read-only ingestion of real Sky130 Liberty files after the fixture parser, atlas layer, timing-table explorer, and docs are solid. Real PDK data is treated as external source material, not copied or symlinked into the repository.
+
+M5 uses `PDK_CARTOGRAPHER_PDK_ROOT` as the preferred external root and falls
+back to `PDK_ROOT`. It discovers `sky130A`/`sky130B`, writes small generated
+Liberty summaries, selects a max-three `sky130_fd_sc_hd` subset, and records
+parser compatibility results. It does not claim full Liberty compliance, static
+timing analysis, or production signoff.
 
 ## M6 - PDK Atlas Reports and Portfolio Release
 
-Produce polished reports and portfolio-ready documentation that connect PDK anatomy, Liberty metadata, parser output, and engineering limitations.
+Produce polished reports and portfolio-ready documentation that connect PDK anatomy, Liberty metadata, parser output, and engineering limitations. M6 should broaden report quality and corner comparison based on M5 findings while keeping raw PDK files external.
 
 ## Later Work
 

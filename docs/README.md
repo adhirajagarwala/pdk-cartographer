@@ -1,6 +1,6 @@
 # Documentation
 
-This documentation records how `pdk-cartographer` is being built as a serious student EDA/PDK exploration toolkit. The project starts with synthetic Liberty fixtures so the code can be tested and explained before any real Sky130 ingestion is attempted.
+This documentation records how `pdk-cartographer` is being built as a serious student EDA/PDK exploration toolkit. The project starts with synthetic Liberty fixtures, then uses M5 to inspect a real external Sky130 PDK through read-only generated summaries.
 
 ## Concept Notes
 
@@ -11,6 +11,7 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [Standard Cell Atlas](concepts/standard-cell-atlas.md) explains the M3 atlas layer, cell records, area ranking, pin summaries, family grouping, classification rules, and limitations.
 - [Timing Table Explorer](concepts/timing-table-explorer.md) explains the M4 timing-table subset, lookup-table templates, slew/load axes, summaries, and limitations.
 - [Timing Corners](concepts/timing-corners.md) explains process, voltage, and temperature corners and why timing changes across them.
+- [Real PDK Read-Only Ingestion](concepts/real-pdk-readonly-ingestion.md) explains the M5 external-PDK strategy, generated summaries, selected real Liberty subset, and parser compatibility boundary.
 
 ## M1 Records
 
@@ -37,6 +38,13 @@ This documentation records how `pdk-cartographer` is being built as a serious st
 - [2026-05-01 M4 Timing Table Explorer Log](logs/2026-05-01-m4-timing-table-explorer.md) records parser, explorer, renderer, generator, and workflow decisions.
 - [M4 Timing Table Explorer Report](reports/m4-timing-table-explorer-report.md) summarizes the implementation, generated artifacts, tests, limitations, and handoff to M5.
 - [Generated M4 Fixture Timing Table Explorer](reports/generated/m4-fixture-timing-table-explorer.md) is the deterministic Markdown artifact generated from synthetic timing-table Liberty fixtures.
+
+## M5 Records
+
+- [M5 Sky130 Read-Only Ingestion](milestones/m5-sky130-readonly-ingestion.md) defines the real-PDK read-only scope, deliverables, acceptance criteria, exclusions, and M6 handoff.
+- [2026-05-03 M5 Sky130 Read-Only Ingestion Log](logs/2026-05-03-m5-sky130-readonly-ingestion.md) records external-PDK setup, guardrail, manifest, and parser-compatibility decisions.
+- [M5 Sky130 Read-Only Ingestion Report](reports/m5-sky130-readonly-ingestion-report.md) summarizes the external root strategy, generated artifacts, selected subset, parser compatibility, limitations, and M6 handoff.
+- [Generated M5 Sky130 Read-Only Ingestion](reports/generated/m5-sky130-readonly-ingestion.md) is the deterministic Markdown artifact generated from the external Sky130 PDK summary.
 
 ## Roadmap
 
