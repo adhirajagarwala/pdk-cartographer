@@ -5,7 +5,9 @@ from pdk_cartographer.pdk.discovery import discover_sky130_pdk
 from pdk_cartographer.pdk.reports import (
     build_parse_compatibility_payload,
     probe_parser_compatibility,
+    render_sky130_readonly_report_markdown,
     write_parse_compatibility_json,
+    write_sky130_readonly_report_markdown,
 )
 
 
@@ -123,3 +125,46 @@ def test_build_parse_compatibility_payload_counts_success_and_failure(
     assert payload["failure_count"] == 1
     assert "full Liberty support" in payload["parser_scope_warning"]
     assert len(payload["compatibility_results"]) == 2
+
+
+def test_render_sky130_readonly_report_markdown_contains_m5_sections(
+    tmp_path: Path,
+) -> None:
+    lib_dir = tmp_path / "sky130A" / "libs.ref" / "sky130_fd_sc_hd" / "lib"
+    subset_name = "sky130_fd_sc_hd__tt_025C_1v80.lib"
+    write_fake_liberty(lib_dir / subset_name, "library(ok) {}")
+    pdk = discover_sky130_pdk(tmp_path)
+
+    report = render_sky130_readonly_report_markdown(
+        pdk,
+        root_display="$PDK_CARTOGRAPHER_PDK_ROOT",
+        root_env_var="PDK_CARTOGRAPHER_PDK_ROOT",
+    )
+
+    assert report.startswith("# M5 Sky130 Read-Only Ingestion Report")
+    assert "external Sky130 PDK" in report
+    assert "Raw PDK files are not committed" in report
+    assert "read-only exploration" in report
+    assert "not production signoff" in report
+    assert "## Parser Compatibility Table" in report
+    assert "## M6 Handoff" in report
+    assert subset_name in report
+    assert "library(ok)" not in report
+
+
+def test_write_sky130_readonly_report_markdown(tmp_path: Path) -> None:
+    lib_dir = tmp_path / "sky130A" / "libs.ref" / "sky130_fd_sc_hd" / "lib"
+    write_fake_liberty(lib_dir / "sky130_fd_sc_hd__tt_025C_1v80.lib", "library(ok) {}")
+    pdk = discover_sky130_pdk(tmp_path)
+    output_path = tmp_path / "reports" / "m5.md"
+
+    write_sky130_readonly_report_markdown(
+        pdk,
+        output_path,
+        root_display="$PDK_CARTOGRAPHER_PDK_ROOT",
+        root_env_var="PDK_CARTOGRAPHER_PDK_ROOT",
+    )
+
+    assert output_path.read_text().startswith(
+        "# M5 Sky130 Read-Only Ingestion Report"
+    )

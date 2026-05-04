@@ -20,10 +20,18 @@ from pdk_cartographer.pdk.discovery import discover_sky130_pdk  # noqa: E402
 from pdk_cartographer.pdk.reports import (  # noqa: E402
     build_parse_compatibility_payload,
     write_parse_compatibility_json,
+    write_sky130_readonly_report_markdown,
 )
 
 OUTPUT_DIR = REPO_ROOT / "data" / "derived" / "m5_sky130_readonly"
 COMPATIBILITY_OUTPUT = OUTPUT_DIR / "sky130_parse_compatibility.json"
+MARKDOWN_OUTPUT = (
+    REPO_ROOT
+    / "docs"
+    / "reports"
+    / "generated"
+    / "m5-sky130-readonly-ingestion.md"
+)
 
 
 def main() -> int:
@@ -58,6 +66,12 @@ def main() -> int:
         return 3
 
     root_display = f"${root_env_var}"
+    write_sky130_readonly_report_markdown(
+        pdk,
+        MARKDOWN_OUTPUT,
+        root_display=root_display,
+        root_env_var=root_env_var,
+    )
     write_parse_compatibility_json(
         pdk,
         COMPATIBILITY_OUTPUT,
@@ -70,6 +84,7 @@ def main() -> int:
         root_env_var=root_env_var,
     )
 
+    print(MARKDOWN_OUTPUT.relative_to(REPO_ROOT).as_posix())
     print(COMPATIBILITY_OUTPUT.relative_to(REPO_ROOT).as_posix())
     print(f"selected_files: {len(payload['selected_files'])}")
     print(f"parse_successes: {payload['success_count']}")
