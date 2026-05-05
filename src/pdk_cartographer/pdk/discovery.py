@@ -24,6 +24,8 @@ def discover_sky130_pdk(
 ) -> PdkRoot:
     """Discover Sky130 variants and Liberty files below an external root."""
 
+    _validate_search_depth("max_variant_depth", max_variant_depth)
+    _validate_search_depth("max_liberty_depth", max_liberty_depth)
     root = root.expanduser()
     variants = tuple(
         _discover_variant(path, root, max_liberty_depth=max_liberty_depth)
@@ -99,7 +101,7 @@ def _bounded_walk_files(root: Path, *, max_depth: int) -> Iterable[Path]:
 
 
 def _bounded_walk(root: Path, *, max_depth: int) -> Iterable[tuple[Path, int]]:
-    if max_depth < 0 or not root.exists() or root.is_symlink():
+    if not root.exists() or root.is_symlink():
         return
 
     stack = [(root, 0)]
@@ -148,3 +150,8 @@ def _relative_path(path: Path, root: Path) -> str:
         return path.relative_to(root).as_posix()
     except ValueError:
         return path.name
+
+
+def _validate_search_depth(label: str, value: int) -> None:
+    if value < 0:
+        raise ValueError(f"{label} must be nonnegative.")

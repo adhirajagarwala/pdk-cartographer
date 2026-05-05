@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from pdk_cartographer.pdk.discovery import discover_sky130_pdk
 
 
@@ -73,6 +75,14 @@ def test_missing_root_returns_empty_result(tmp_path: Path) -> None:
     pdk = discover_sky130_pdk(tmp_path / "missing")
 
     assert pdk.variants == ()
+
+
+def test_discovery_rejects_negative_search_depth(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="max_variant_depth must be nonnegative"):
+        discover_sky130_pdk(tmp_path, max_variant_depth=-1)
+
+    with pytest.raises(ValueError, match="max_liberty_depth must be nonnegative"):
+        discover_sky130_pdk(tmp_path, max_liberty_depth=-1)
 
 
 def test_discovery_normalizes_paths_relative_to_configured_root(
