@@ -12,8 +12,7 @@ if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from pdk_cartographer.pdk.config import (  # noqa: E402
-    FALLBACK_PDK_ROOT_ENV,
-    PREFERRED_PDK_ROOT_ENV,
+    get_configured_pdk_root_env_var,
     get_pdk_root_from_env,
 )
 from pdk_cartographer.pdk.discovery import discover_sky130_pdk  # noqa: E402
@@ -95,11 +94,7 @@ def main() -> int:
 
 
 def _configured_root_env_var() -> str | None:
-    if os.environ.get(PREFERRED_PDK_ROOT_ENV):
-        return PREFERRED_PDK_ROOT_ENV
-    if os.environ.get(FALLBACK_PDK_ROOT_ENV):
-        return FALLBACK_PDK_ROOT_ENV
-    return None
+    return get_configured_pdk_root_env_var(os.environ)
 
 
 if __name__ == "__main__":
