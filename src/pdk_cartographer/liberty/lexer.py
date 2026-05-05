@@ -80,7 +80,7 @@ class _Lexer:
                 tokens.append(self._consume_string())
             elif char in _PUNCTUATION:
                 tokens.append(self._consume_punctuation())
-            elif char == "-" or char.isdigit():
+            elif self._is_number_start():
                 tokens.append(self._consume_number())
             elif _is_identifier_start(char):
                 tokens.append(self._consume_identifier())
@@ -142,20 +142,28 @@ class _Lexer:
         line = self._line
         column = self._column
         chars: list[str] = []
-        if self._peek() == "-":
+        if self._peek() in {"+", "-"}:
             chars.append(self._advance())
-            if self._at_end() or not self._peek().isdigit():
-                raise self._error("expected digit after '-'")
+            if self._at_end() or not (
+                self._peek().isdigit() or self._peek() == "."
+            ):
+                raise self._error("expected digit or decimal point after sign")
 
         while not self._at_end() and self._peek().isdigit():
             chars.append(self._advance())
 
+        saw_decimal_digits = False
         if not self._at_end() and self._peek() == ".":
             chars.append(self._advance())
             if self._at_end() or not self._peek().isdigit():
                 raise self._error("expected digit after decimal point")
             while not self._at_end() and self._peek().isdigit():
+                saw_decimal_digits = True
                 chars.append(self._advance())
+
+        integer_part = "".join(chars).lstrip("+-").split(".", maxsplit=1)[0]
+        if not integer_part and not saw_decimal_digits:
+            raise self._error("expected numeric value")
 
         if not self._at_end() and self._peek() in {"e", "E"}:
             chars.append(self._advance())
@@ -167,6 +175,15 @@ class _Lexer:
                 chars.append(self._advance())
 
         return Token(TokenKind.NUMBER, "".join(chars), line, column)
+
+    def _is_number_start(self) -> bool:
+        char = self._peek()
+        next_char = self._peek_next()
+        if char.isdigit():
+            return True
+        if char in {"+", "-"}:
+            return next_char is not None and (next_char.isdigit() or next_char == ".")
+        return char == "." and next_char is not None and next_char.isdigit()
 
     def _consume_identifier(self) -> Token:
         line = self._line

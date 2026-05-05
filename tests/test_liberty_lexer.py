@@ -78,6 +78,15 @@ def test_tokenize_numbers_include_negative_and_exponent_forms() -> None:
     ]
 
 
+def test_tokenize_numbers_include_plus_sign_and_leading_decimal() -> None:
+    tokens = tokenize("cell(NUM_X1) { area : +.25; capacitance : .125e-3; }")
+
+    assert [token.value for token in tokens if token.kind == TokenKind.NUMBER] == [
+        "+.25",
+        ".125e-3",
+    ]
+
+
 def test_unterminated_block_comment_reports_location() -> None:
     with pytest.raises(LibertyLexError) as exc_info:
         tokenize("library(bad) { /* unterminated")
