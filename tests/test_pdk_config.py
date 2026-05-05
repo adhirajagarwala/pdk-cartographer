@@ -1,6 +1,9 @@
 from pathlib import Path
 
-from pdk_cartographer.pdk.config import get_pdk_root_from_env
+from pdk_cartographer.pdk.config import (
+    get_configured_pdk_root_env_var,
+    get_pdk_root_from_env,
+)
 
 
 def test_get_pdk_root_prefers_project_specific_env() -> None:
@@ -29,6 +32,34 @@ def test_get_pdk_root_uses_fallback_when_project_specific_env_is_empty() -> None
     )
 
     assert root == Path("/tmp/fallback-pdk")
+
+
+def test_get_pdk_root_treats_whitespace_only_value_as_unset() -> None:
+    root = get_pdk_root_from_env(
+        {
+            "PDK_CARTOGRAPHER_PDK_ROOT": "   ",
+            "PDK_ROOT": "/tmp/fallback-pdk",
+        }
+    )
+
+    assert root == Path("/tmp/fallback-pdk")
+
+
+def test_get_pdk_root_strips_surrounding_whitespace() -> None:
+    root = get_pdk_root_from_env({"PDK_CARTOGRAPHER_PDK_ROOT": "  ~/pdks  "})
+
+    assert root == Path("~/pdks").expanduser()
+
+
+def test_get_configured_pdk_root_env_var_matches_root_precedence() -> None:
+    variable_name = get_configured_pdk_root_env_var(
+        {
+            "PDK_CARTOGRAPHER_PDK_ROOT": "",
+            "PDK_ROOT": "/tmp/fallback-pdk",
+        }
+    )
+
+    assert variable_name == "PDK_ROOT"
 
 
 def test_get_pdk_root_returns_none_when_unset() -> None:
