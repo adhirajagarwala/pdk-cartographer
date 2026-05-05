@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from pdk_cartographer.pdk.discovery import discover_sky130_pdk
 from pdk_cartographer.pdk.reports import (
     build_parse_compatibility_payload,
@@ -73,6 +75,34 @@ def test_probe_parser_compatibility_records_failure_without_stack_trace(
     assert results[0].error_message is not None
     assert "\n" not in results[0].error_message
     assert "Traceback" not in results[0].error_message
+
+
+def test_probe_parser_compatibility_records_empty_exception_message(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    lib_path = (
+        tmp_path
+        / "sky130A"
+        / "libs.ref"
+        / "sky130_fd_sc_hd"
+        / "lib"
+        / "sky130_fd_sc_hd__tt_025C_1v80.lib"
+    )
+    write_fake_liberty(lib_path, "library(fake) {}\n")
+
+    def raise_empty_error(path: Path) -> None:
+        raise RuntimeError()
+
+    monkeypatch.setattr(
+        "pdk_cartographer.pdk.reports.parse_liberty_file",
+        raise_empty_error,
+    )
+
+    results = probe_parser_compatibility(discover_sky130_pdk(tmp_path))
+
+    assert results[0].success is False
+    assert results[0].error_message == "RuntimeError"
 
 
 def test_write_parse_compatibility_json_omits_raw_liberty_text(tmp_path: Path) -> None:

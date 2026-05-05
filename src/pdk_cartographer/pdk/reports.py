@@ -275,7 +275,7 @@ def _timing_table_count(library: Library) -> int:
 
 
 def _compact_error_message(error: Exception) -> str:
-    message = " ".join(str(error).split())
+    message = " ".join(str(error).split()) or type(error).__name__
     if len(message) <= MAX_ERROR_MESSAGE_CHARS:
         return message
     return message[: MAX_ERROR_MESSAGE_CHARS - 3] + "..."
